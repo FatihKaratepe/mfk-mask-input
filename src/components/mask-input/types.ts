@@ -7,7 +7,10 @@ export type UnionToIntersection<T> = (T extends unknown ? (x: T) => unknown : ne
     }
   : never;
 
-type OnChangeParam = Parameters<Exclude<InputProps['onChange'], undefined>>[0];
+type AntdOnChangeParam = Parameters<Exclude<InputProps['onChange'], undefined>>[0];
+type InputOnChangeParam = Parameters<Exclude<React.InputHTMLAttributes<HTMLInputElement>['onChange'], undefined>>[0];
+
+type OnChangeParam = AntdOnChangeParam | InputOnChangeParam;
 
 export interface OnChangeEvent extends OnChangeParam {
   maskedValue: string;
@@ -30,7 +33,8 @@ type MaskOptionsList = Array<IMaskOptions>;
 
 export type MaskType = MaskFieldType | MaskOptionsList;
 
-export interface MaskedInputProps extends Omit<InputProps, 'onChange' | 'value' | 'defaultValue'> {
+type GeneralInputProps = React.InputHTMLAttributes<HTMLInputElement> & InputProps;
+export interface MaskedInputProps extends Omit<GeneralInputProps, 'onChange' | 'value' | 'defaultValue'> {
   mask: MaskType;
   definitions?: InputMaskOptions['definitions'];
   value?: string;

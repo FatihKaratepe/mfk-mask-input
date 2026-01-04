@@ -1,9 +1,8 @@
-import { Input, type InputRef } from 'antd';
 import IMask from 'imask';
 import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { IMaskOptions, MaskedInputProps, OnChangeEvent } from './types';
 
-export const MaskInput = forwardRef<InputRef, MaskedInputProps>(function MaskedInput(props, forwardedRef) {
+const InputMask = forwardRef<HTMLInputElement, MaskedInputProps>(function MaskedInput(props, forwardedRef) {
   const {
     mask,
     maskOptions: _maskOptions,
@@ -82,15 +81,15 @@ export const MaskInput = forwardRef<InputRef, MaskedInputProps>(function MaskedI
     }
   }, [controlledValue]);
 
-  const handleRef = (ref: InputRef) => {
+  const handleRef = (ref: HTMLInputElement | null) => {
+    inputRef.current = ref;
     if (forwardedRef) {
       if (typeof forwardedRef === 'function') forwardedRef(ref);
       else forwardedRef.current = ref;
     }
-    if (ref?.input) {
-      inputRef.current = ref.input;
-    }
   };
 
-  return <Input {...defaultInputProps} ref={handleRef} value={value} onChange={onChange} />;
+  return <input {...defaultInputProps} ref={handleRef} value={value} onChange={() => {}} />;
 });
+
+export default InputMask;

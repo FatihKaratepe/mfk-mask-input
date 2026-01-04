@@ -1,13 +1,18 @@
 import { Card, Col, Row, Select } from 'antd';
-import IMask from 'imask';
-import { useState } from 'react';
-import { MaskInput } from './components/mask-input';
+import { useMemo, useState } from 'react';
+import { IMask, MaskInput } from './components/mask-input';
 import { phoneCodes } from './constants/phone-codes';
 
 function App() {
   const [selectedCountry, setSelectedCountry] = useState<string>('US');
   const [value, setValue] = useState<string>('');
   const countries = Object.keys(phoneCodes).map((code) => ({ label: code, value: code }));
+
+  const masks = useMemo(() => {
+    if (!selectedCountry) return 'US';
+    const code = phoneCodes[selectedCountry];
+    return Array.isArray(code) ? code.map((m) => ({ mask: m })) : code;
+  }, [selectedCountry]);
 
   return (
     <div className="container">
@@ -58,16 +63,10 @@ function App() {
                 />
               </Col>
               <Col span={18}>
-                <MaskInput
+                <MaskInput.Antd
                   value={value}
                   onChange={(e) => setValue(e.maskedValue)}
-                  mask={
-                    selectedCountry
-                      ? Array.isArray(phoneCodes[selectedCountry])
-                        ? phoneCodes[selectedCountry].map((m) => ({ mask: m }))
-                        : phoneCodes[selectedCountry]
-                      : 'US'
-                  }
+                  mask={masks}
                   placeholder="Enter phone number"
                 />
               </Col>
