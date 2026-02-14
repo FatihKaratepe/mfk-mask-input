@@ -1,9 +1,20 @@
-import { Input, type InputRef } from 'antd';
 import IMask from 'imask';
 import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { IMaskOptions, MaskedInputProps, OnChangeEvent } from './types';
 
-const AntdInputMask = forwardRef<InputRef, MaskedInputProps>(function MaskedInput(props, forwardedRef) {
+/**
+ * InputMask - A vanilla masked input component
+ * 
+ * @example
+ * ```tsx
+ * <InputMask
+ *   mask="(000) 000-0000"
+ *   placeholder="Phone number"
+ *   onChange={(e) => console.log(e.maskedValue, e.unmaskedValue)}
+ * />
+ * ```
+ */
+const InputMask = forwardRef<HTMLInputElement, MaskedInputProps>(function MaskedInput(props, forwardedRef) {
   const {
     mask,
     maskOptions: _maskOptions,
@@ -15,7 +26,7 @@ const AntdInputMask = forwardRef<InputRef, MaskedInputProps>(function MaskedInpu
   } = props;
 
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const maskRef = useRef<IMask.InputMask<IMask.AnyMasked | IMask.AnyMaskedOptions> | null>(null);
+  const maskRef = useRef<ReturnType<typeof IMask> | null>(null);
 
   const initialValue = (typeof controlledValue === 'string' ? controlledValue : defaultValue) || '';
   const [value, setValue] = useState(initialValue);
@@ -31,18 +42,18 @@ const AntdInputMask = forwardRef<InputRef, MaskedInputProps>(function MaskedInpu
       },
       ..._maskOptions,
     } as IMaskOptions;
-  }, [mask, _maskOptions, definitions]) as IMask.AnyMaskedOptions;
+  }, [mask, _maskOptions, definitions]);
 
   const initMask = useCallback(() => {
     const el = inputRef.current;
     if (!el) return;
 
     if (maskRef.current) {
-      maskRef.current.updateOptions(maskOptions);
+      maskRef.current.updateOptions(maskOptions as any);
       return;
     }
 
-    const maskInstance = IMask(el, maskOptions);
+    const maskInstance = IMask(el, maskOptions as any);
     maskRef.current = maskInstance;
 
     maskInstance.on('accept', () => {
@@ -82,17 +93,15 @@ const AntdInputMask = forwardRef<InputRef, MaskedInputProps>(function MaskedInpu
     }
   }, [controlledValue]);
 
-  const handleRef = (ref: InputRef) => {
+  const handleRef = (ref: HTMLInputElement | null) => {
+    inputRef.current = ref;
     if (forwardedRef) {
       if (typeof forwardedRef === 'function') forwardedRef(ref);
       else forwardedRef.current = ref;
     }
-    if (ref?.input) {
-      inputRef.current = ref.input;
-    }
   };
 
-  return <Input {...defaultInputProps} ref={handleRef} value={value} onChange={onChange} />;
+  return <input {...defaultInputProps} ref={handleRef} value={value} onChange={() => {}} />;
 });
 
-export default AntdInputMask
+export default InputMask;

@@ -1,4 +1,3 @@
-import type { InputProps } from 'antd';
 import IMask from 'imask';
 
 export type UnionToIntersection<T> = (T extends unknown ? (x: T) => unknown : never) extends (x: infer R) => unknown
@@ -7,10 +6,9 @@ export type UnionToIntersection<T> = (T extends unknown ? (x: T) => unknown : ne
     }
   : never;
 
-type AntdOnChangeParam = Parameters<Exclude<InputProps['onChange'], undefined>>[0];
 type InputOnChangeParam = Parameters<Exclude<React.InputHTMLAttributes<HTMLInputElement>['onChange'], undefined>>[0];
 
-type OnChangeParam = AntdOnChangeParam | InputOnChangeParam;
+type OnChangeParam = InputOnChangeParam;
 
 export interface OnChangeEvent extends OnChangeParam {
   maskedValue: string;
@@ -33,7 +31,7 @@ type MaskOptionsList = Array<IMaskOptions>;
 
 export type MaskType = MaskFieldType | MaskOptionsList;
 
-type GeneralInputProps = React.InputHTMLAttributes<HTMLInputElement> & InputProps;
+type GeneralInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 export interface MaskedInputProps extends Omit<GeneralInputProps, 'onChange' | 'value' | 'defaultValue'> {
   mask: MaskType;
   definitions?: InputMaskOptions['definitions'];

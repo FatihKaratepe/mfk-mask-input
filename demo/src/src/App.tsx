@@ -63,7 +63,7 @@ function App() {
                 />
               </Col>
               <Col span={18}>
-                <MaskInput.Antd
+                <MaskInput
                   value={value}
                   onChange={(e) => setValue(e.maskedValue)}
                   mask={masks}

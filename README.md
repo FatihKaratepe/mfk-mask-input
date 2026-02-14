@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# mfk-mask-input
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight and flexible vanilla React masked input component built with IMask.
 
-Currently, two official plugins are available:
+## 📦 Package
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The npm package is located in the `lib/` directory. See [lib/README.md](lib/README.md) for full documentation.
 
-## React Compiler
+### Quick Install
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install mfk-mask-input
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Quick Example
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```tsx
+import { InputMask } from "mfk-mask-input";
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+<InputMask
+  mask="(000) 000-0000"
+  placeholder="Phone number"
+  onChange={(e) => console.log(e.maskedValue, e.unmaskedValue)}
+/>;
 ```
+
+## 🚀 Demo
+
+A live demo application is available in the `demo/` directory. To run it:
+
+```bash
+cd demo
+npm install
+npm run dev
+```
+
+## 📁 Project Structure
+
+```
+mfk-mask-input/
+├── lib/          # NPM package source
+├── demo/         # Demo application
+├── LICENSE
+├── CHANGELOG.md
+└── README.md
+```
+
+## 🔧 Development
+
+### Building the Library
+
+```bash
+cd lib
+npm install
+npm run build
+```
+
+### Running the Demo
+
+```bash
+cd demo
+npm install
+npm run dev
+```
+
+## 📖 Documentation
+
+For complete API documentation, usage examples, and TypeScript support, see:
+
+- [Library README](lib/README.md)
+- [Demo Application](demo/)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+MIT - See [LICENSE](LICENSE) for details.
+
+## 🔗 Links
+
+- **IMask**: https://imask.js.org/
