@@ -1,6 +1,6 @@
 {
   "name": "mfk-mask-input",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "author": {
     "name": "Fatih Karatepe",
     "email": "m.fatikaratepe@gmail.com",
@@ -14,9 +14,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "files": [

@@ -2,6 +2,9 @@
 
 A lightweight and flexible vanilla React masked input component built with [IMask](https://imask.js.org/).
 
+## 🚀 [**Live Demo →**](https://mfk-mask-input.vercel.app/)
+## 🔗 [**AntD Input Variant**](https://www.npmjs.com/package/mfk-mask-input-antd)
+
 ## Features
 
 - 🎭 **Flexible Masking** - Supports various mask patterns (phone, credit card, date, custom)
