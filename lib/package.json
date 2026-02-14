@@ -1,7 +1,14 @@
 {
   "name": "mfk-mask-input",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "author": {
+    "name": "Fatih Karatepe",
+    "email": "m.fatikaratepe@gmail.com",
+    "url": "https://github.com/FatihKaratepe"
+  },
+  "repository": "https://github.com/FatihKaratepe/mfk-mask-input",
   "description": "A vanilla React masked input component using IMask",
+  "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -29,12 +36,7 @@
     "form",
     "component"
   ],
-  "author": "",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
   "peerDependencies": {
     "imask": "^6.0.0 || ^7.0.0",
     "react": "^18.0.0 || ^19.0.0",
